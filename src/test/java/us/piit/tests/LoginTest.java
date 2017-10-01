@@ -5,12 +5,17 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import us.piit.config.RegressionTests;
+import us.piit.config.SlowTests;
+import us.piit.config.SmokeTests;
 import us.piit.pages.LandingPage;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+@Category({SmokeTests.class})
 public class LoginTest {
 
     AppiumDriver driver;
@@ -45,6 +50,13 @@ public class LoginTest {
 
     @Test
     public void loginWithValidCredentials(){
+        LandingPage landingPage = new LandingPage(driver);
+        landingPage.clickSignInBtn().doValidLogin("test123@yahoo.com","hjdfhjhjdh");
+    }
+
+
+    @Test
+    public void loginWithInValidCredentials(){
         LandingPage landingPage = new LandingPage(driver);
         landingPage.clickSignInBtn().doValidLogin("test123@yahoo.com","hjdfhjhjdh");
     }
